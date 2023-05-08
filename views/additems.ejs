@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Add Item</title>
+  <style>
+    /* Styles for form labels */
+    label {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    /* Styles for form inputs */
+    input[type="text"],
+    input[type="number"] {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    /* Styles for form button */
+    button[type="submit"] {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    /* Styles for form button on hover */
+    button[type="submit"]:hover {
+      background-color: #3E8E41;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Item</h1>
+  <form method="POST" action="/additems">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" required>
+    <button type="submit">Add Item</button>
+  </form>
+</body>
+</html>

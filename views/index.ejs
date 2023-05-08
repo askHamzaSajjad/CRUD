@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Items</title>
+  <style>
+    /* Styles for the main heading */
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    /* Styles for the list */
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    /* Styles for list items */
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+    }
+    /* Styles for item name */
+    .item-name {
+      font-weight: bold;
+    }
+    /* Styles for item price */
+    .item-price {
+      color: #4CAF50;
+    }
+    /* Styles for labels */
+    .label {
+      font-weight: bold;
+    }
+    /* Styles for buttons */
+    .btn {
+      padding: 0.25rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    /* Styles for update button */
+    .btn-update {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    /* Styles for delete button */
+    .btn-delete {
+      background-color: #f44336;
+      color: #fff;
+    }
+    /* Styles for add user button */
+    .btn-add-user {
+      background-color: #2196F3;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Items</h1>
+  <button class="btn btn-add-user" onclick="location.href='/additems'">Add New User</button>
+  <ul>
+    <% for (var i = 0; i < items.length; i++) { %>
+      <li>
+        <span>
+          <span class="label">ID:</span> <span class="item-name"><%= items[i]._id %></span>
+          <br>
+          <span class="label">Name:</span> <span class="item-name"><%= items[i].name %></span>
+          <br>
+          <span class="label">Price:</span> <span class="item-price">$<%= items[i].price %></span>
+          <br>
+          <span class="label">Description:</span> <%= items[i].description %> 
+        </span>
+      </li>
+    <% } %>
+    <span>
+      <button class="btn btn-update" onclick="location.href='/updateitems'">Update</button>
+      <button class="btn btn-delete" onclick="location.href='/delete'">Delete</button>
+    </span>
+  </ul>
+</body>
+</html>

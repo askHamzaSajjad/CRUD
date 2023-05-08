@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Item</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    h1 {
+      background-color: #3498db;
+      color: white;
+      padding: 20px;
+    }
+    
+    form {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"] {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-home {
+  background-color: #27ae60;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+button[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Delete</h1>
+  <form method="post" action="/deleteitem">
+    <label for="item-id">Item ID:</label>
+    <input type="text" id="item-id" name="itemId" required>
+    <br>
+    <button type="submit">Delete</button>
+    <button class="btn btn-home" onclick="location.href='/getusers'">Home</button>
+    <button class="btn btn-add-user" onclick="location.href='/additems'">Add New User</button>
+  </form>
+</body>
+</html>

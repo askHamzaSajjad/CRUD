@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Items</title>
+  <style>
+    /* Styles for the main heading */
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    /* Styles for the form */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    /* Styles for form fields */
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+    }
+    /* Styles for buttons */
+    .btn {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    /* Styles for update button */
+    .btn-update {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+    /* Styles for cancel button */
+    .btn-cancel {
+      background-color: #f44336;
+      color: #fff;
+    }
+    /* Styles for select element */
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Update Items</h1>
+  <form action="/updateitems" method="POST">
+    <label for="id">Select Item ID:</label>
+    <select name="id" id="id">
+      <% for (var i = 0; i < items.length; i++) { %>
+        <option value="<%= items[i]._id %>"><%= items[i]._id %></option>
+      <% } %>
+    </select>
+    <label for="name">Name</label>
+    <input type="text" name="name">
+    <label for="price">Price</label>
+    <input type="text" name="price">
+    <label for="description">Description</label>
+    <textarea name="description"></textarea>
+    <button class="btn btn-update" type="submit">Update</button>
+    <button class="btn btn-cancel" onclick="location.href='/updateitems'">Cancel</button>
+  </form>
+</body>
+</html>
