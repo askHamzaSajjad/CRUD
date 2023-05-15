@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const itemsRouter = require('./routes/users');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const session = require('express-session'); 
+
 // app.use(connectToDatabase);
 // Parse incoming request bodies in a middleware before your handlers
 // Creating databaseconnection
@@ -33,25 +35,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended:false}));
 app.set('view engine', 'ejs');
 
+// *****************Session middleware************************************************///
+const MongoDBStore = require('connect-mongodb-session')(session);              //*****///
+const store = new MongoDBStore({                                               //*****///
+  uri: 'mongodb+srv://askhamza:g9867542310@cluster0.0hhnuox.mongodb.net/test', //*****///
+  collection: 'sessions'});                                                    //*****///
+app.use(session({                                                              //*****///
+  secret: 'mysecret',                                                          //*****///
+  resave: false,                                                               //*****///
+  saveUninitialized: false,                                                    //*****///
+  store                                                                        //*****///
+}));                                                                           //*****///
+// ***********************************************************************************///
 
-// app.use(sessionMiddleware());
+
 // only one base route
 app.use(methodOverride('_method'));
 app.use('/', itemsRouter);
 
-
-
-// Routes
-
-
-app.get('/login', (req, res) => {
-    res.render("login.ejs");
-}
-)
-app.get('/register', (req, res) => {
-    res.render("register.ejs");
-}
-)
 // End Routes
 
 

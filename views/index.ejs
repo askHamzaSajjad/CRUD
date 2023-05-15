@@ -62,11 +62,31 @@
       background-color: #2196F3;
       color: #fff;
     }
+    .btn-logout {
+      background-color: #aaf321;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
   <h1>Items</h1>
   <button class="btn btn-add-user" onclick="location.href='/additems'">Add New User</button>
+  <button class="btn btn-logout" onclick="logout()">Logout</button> <!-- Add this button -->
+  <script>
+    function logout() {
+      // Add code here to log the user out
+      // For example, you can make an AJAX request to a logout endpoint on the server
+      // and redirect the user to the login page
+      // Here's an example using the fetch API:
+      fetch('/logout', {
+        method: 'POST'
+      }).then(() => {
+        location.href = '/login';
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  </script>
   <ul>
     <% for (var i = 0; i < items.length; i++) { %>
       <li>

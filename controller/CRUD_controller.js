@@ -3,11 +3,13 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const Item = require('../models/itemschema');
 const User = require('../models/userschema');
+const isAuthenticated = require('../middleware/authenticator');
+
 
 // ***************************************************************************************
 // **********************************POST Controllers*************************************
 // ***************************************************************************************
-const registerController =async(req, res, next) => {
+exports.registerController =async(req, res, next) => {
     try {
       const hashedpassword = await bcrypt.hash(req.body.password, 10);
       const user = new User({
@@ -27,25 +29,28 @@ const registerController =async(req, res, next) => {
     }
   };
 
-const loginController = async (req, res, next) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-      console.log(user);
-      // Verify user credentials
-      if (!user || !await bcrypt.compare(password, user.password)) {
-        return res.redirect('/login');
-      }
-      req.session.user = { id: user._id, name: user.name };
-      res.redirect('/getusers');
-    } catch (e) {
-      console.error(e);
-      res.redirect('/login');
-      next(e);
+exports.loginController = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await User.findOne({ email });
+    req.session.user
+    console.log(user);
+    // Verify user credentials
+    if (!user || !await bcrypt.compare(password, user.password)) {
+      return res.redirect('/login');
     }
-  };
+    else {
+     return res.redirect('/getusers');
+    }}
+   catch (e) {
+    console.error(e);
+    res.redirect('/login');
+    next(e);
+  }
+};
 
-const deleteItemController = async (req, res) => {
+exports.deleteItemController = async (req, res) => {
   try {
     const itemId = req.body.itemId;
     const deletedItem = await Item.findByIdAndDelete(itemId);
@@ -59,7 +64,7 @@ const deleteItemController = async (req, res) => {
   }
 };
 
-const updateItemController = async (req, res) => {
+exports.updateItemController = async (req, res) => {
     try {
       const name = req.body.name;
       const price = req.body.price;
@@ -78,7 +83,7 @@ const updateItemController = async (req, res) => {
     }
 };
 
-const addItemController =  async (req, res, next) => {
+exports.addItemController =  async (req, res, next) => {
     try {
       const newItem = new Item({
         name: req.body.name,
@@ -102,10 +107,14 @@ const addItemController =  async (req, res, next) => {
 // ***************************************************************************************
 // **********************************GET Controllers**************************************
 // ***************************************************************************************
-
-const add_getController =  async(req, res) => {                             
+exports.register = (req, res) => {
+  res.render("register.ejs");}
+ 
+exports.login_page =  (req, res) => {
+  res.render("login.ejs");}
+  exports.add_getController =  async(req, res) => {                             
   res.render('additems')}                                                    
-const delete_getController = async (req, res) => {
+  exports.delete_getController = async (req, res) => {
   try {
     const items = await Item.find().exec();
     console.log(items);
@@ -114,7 +123,7 @@ const delete_getController = async (req, res) => {
     res.status(500).send(error);
   }
 };                                                                           
-const update_getController = async (req, res) => {
+exports.update_getController = async (req, res) => {
   try {
     const items = await Item.find().exec();
     console.log(items);
@@ -123,7 +132,7 @@ const update_getController = async (req, res) => {
     res.status(500).send(error);
   }
 };                                                                           
-const getusersController = async (req, res, next) => {
+exports.getusersController = async (req, res, next) => {
   try {
     const name = req.body.id;
     const data = await Item.find().exec();
@@ -138,6 +147,6 @@ const getusersController = async (req, res, next) => {
 // ****************************************************************************************
 // ****************************************************************************************
 // Export the controller function
-module.exports = {deleteItemController, updateItemController,
-  addItemController,registerController,loginController,
-  add_getController,delete_getController,update_getController,getusersController};
+// module.exports = {deleteItemController, updateItemController,
+//   addItemController,registerController,loginController,
+//   add_getController,delete_getController,update_getController,getusersController,register,login_page};
